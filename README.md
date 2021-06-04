@@ -35,8 +35,8 @@ In your Django settings.py
 2. you can clone or fork the git repo
 
 ```bash
-$ virtualenv django-env
-$ source django-env/bin/activate
+$ virtualenv {your virtual env name}
+$ source {your virtual env name}/bin/activate
 $ pip install -r requirements.txt
 $ cd projectname/
 $ python manage.py migrate
