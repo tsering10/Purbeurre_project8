@@ -15,6 +15,20 @@ This app lets a user search for a product and suggests similar healthier product
 * Database structure implementation : use `manage.py migrate` command
 * To update the database use `manage.py db_loading`
 
+In your Django settings.py
+
+```bash
+   'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'YOUR DB NAME',
+        'USER': 'YOUR DB USERNAME',
+        'PASSWORD': 'YOUR DB PASSWORD', 
+        'HOST': 'YOUR DB HOST',
+        'PORT': '5432',
+    }
+}
+```
+
 ## Getting Started
 
 1. Setup project environment with [virtualenv](https://virtualenv.pypa.io) and [pip](https://pip.pypa.io).
