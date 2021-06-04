@@ -51,3 +51,18 @@ Then go to localhost:8000 or 127.0.0.1:8000, and the app should be launched and 
 $ ./manage.py test 
 
 ```
+If you want to know the test coverage:
+
+
+```bash
+$ coverage run ./manage.py test 
+
+```
+To get test report and generate report in html file:
+
+
+```bash
+$ coverage report -m
+
+$ coverage html
+```
