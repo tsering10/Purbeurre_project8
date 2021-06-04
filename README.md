@@ -41,9 +41,10 @@ $ pip install -r requirements.txt
 $ cd projectname/
 $ python manage.py migrate
 $ python manage.py runserver
-Then go to localhost:8000 or 127.0.0.1:8000, and the app should be launched and usable there.
 
 ```
+Then go to localhost:8000 or 127.0.0.1:8000, and the app should be launched and usable there.
+
 ## 4. To run the tests
 
 
