@@ -18,4 +18,4 @@ htmlcov/**
 .coverage
 .DS_Store
 tests/geckodriver
-
+.ipynb_checkpoints
