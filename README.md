@@ -15,21 +15,55 @@ This app lets a user search for a product and suggests similar healthier product
 * Database structure implementation : use `manage.py migrate` command
 * To update the database use `manage.py db_loading`
 
-## Getting Started
+In your Django settings.py
+
+```bash
+   'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'YOUR DB NAME',
+        'USER': 'YOUR DB USERNAME',
+        'PASSWORD': 'YOUR DB PASSWORD', 
+        'HOST': 'YOUR DB HOST',
+        'PORT': '5432',
+    }
+}
+```
+
+## 3. Getting Started
 
 1. Setup project environment with [virtualenv](https://virtualenv.pypa.io) and [pip](https://pip.pypa.io).
 2. you can clone or fork the git repo
 
 ```bash
-$ virtualenv django-env
-$ source django-env/bin/activate
+$ virtualenv {your virtual env name}
+$ source {your virtual env name}/bin/activate
 $ pip install -r requirements.txt
 $ cd projectname/
 $ python manage.py migrate
 $ python manage.py runserver
-Then go to localhost:8000 or 127.0.0.1:8000, and the app should be launched and usable there.
-
 
 ```
+Then go to localhost:8000 or 127.0.0.1:8000, and the app should be launched and usable there.
+
+## 4. To run the tests
 
 
+```bash
+$ ./manage.py test 
+
+```
+If you want to know the test coverage:
+
+
+```bash
+$ coverage run ./manage.py test 
+
+```
+To get test report and generate report in html file:
+
+
+```bash
+$ coverage report -m
+
+$ coverage html
+```
