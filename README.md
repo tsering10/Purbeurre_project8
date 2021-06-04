@@ -29,7 +29,7 @@ In your Django settings.py
 }
 ```
 
-## Getting Started
+## 3. Getting Started
 
 1. Setup project environment with [virtualenv](https://virtualenv.pypa.io) and [pip](https://pip.pypa.io).
 2. you can clone or fork the git repo
@@ -43,7 +43,11 @@ $ python manage.py migrate
 $ python manage.py runserver
 Then go to localhost:8000 or 127.0.0.1:8000, and the app should be launched and usable there.
 
+```
+## 4. To run the tests
+
+
+```bash
+$ ./manage.py test 
 
 ```
-
-
