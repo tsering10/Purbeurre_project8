@@ -1,0 +1,48 @@
+{% extends 'purbeurre/base.html'%}
+
+{% block title%}{{ page_title }}{% endblock %}
+
+{% block content %}
+
+<!-- {% include 'purbeurre/header.html' with title=title img=img %}  -->
+
+<section style="background-image: url('{{img}}');" class="page-section bg-dark text-white">
+    <div class="col-lg-10 mx-auto text-center">
+  </section>
+
+  <section class="page-section bg-dark text-white">
+    <div class="container">
+        <div class="row main">
+            <div class="main-center col-sm-12">
+                <h4 class="text-center mb-5"> Créer un compte </h4>
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                        {{ field.label_tag }}{{ field }}
+                            </div>
+                        </div>
+                        <div class="mx-auto text-center">
+                            {% for error in field.errors %}
+                                <p style="color: red">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                    <div class="text-center mt-4">
+                        <div class="form-group d-inline">
+                           <button type="submit" class="btn btn-primary"> S'enregistrer </button>
+                        </div>
+                        <div class="text-center d-inline">
+                            <a href="{% url 'purbeurre:contacts' %}"> <button  class="btn btn-primary" style="margin:10px;">  Se connecter </button></a>
+                        </div>
+                </form>
+                    
+                       
+                      </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
