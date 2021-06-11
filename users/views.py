@@ -1,21 +1,19 @@
-from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
-from django.http import Http404
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from purbeurre.models import Products,Substitutes
+from purbeurre.models import Products, Substitutes
 from purbeurre.forms import SignUpForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
 
 # Create your views here.
 
 def index(request):
+    """ index page """
     context = {
-        'page_title':'Accueil'
+        'page_title': 'Accueil'
     }
-    return render(request,'purbeurre/index.html')
+    return render(request, 'purbeurre/index.html')
 
 
 def sign_up(request):
@@ -34,7 +32,7 @@ def sign_up(request):
             return redirect('/users/account')
     else:
         form = SignUpForm()
-    
+
     context = {
         "form": form,
         "title": "Créer un compte",
@@ -42,12 +40,13 @@ def sign_up(request):
     }
     return render(request, 'purbeurre/sign_up.html', context)
 
+
 @login_required
 def saved(request):
     products_saved = Substitutes.objects.filter(user=request.user)
-    
+
     # If user wants to delete a substitute product
-    if  request.user.is_authenticated and request.method == 'POST':
+    if request.user.is_authenticated and request.method == 'POST':
         origin = request.POST.get('origin')
         replacement = request.POST.get('replacement')
 
@@ -59,14 +58,10 @@ def saved(request):
             origin=origin,
             replacement=replacement,
             user=request.user
-            ).delete()
+        ).delete()
 
-    # # slice pages
-    # profile_list = Substitutes.objects.get_queryset().order_by('id')
-    # # show 5 items every page
-    # paginator = Paginator(profile_list, 5) 
     # Slice pages
-    paginator = Paginator(products_saved, 5) # show 5 items every page
+    paginator = Paginator(products_saved, 5)  # show 5 items every page
     page = request.GET.get('page')
 
     try:
@@ -75,13 +70,14 @@ def saved(request):
         products_saved = paginator.page(1)
     except EmptyPage:
         products_saved = paginator.page(paginator.num_pages)
-    
+
     context = {
         "title": "Vos Favoris",
         "products_saved": products_saved,
         "paginate": True,
     }
     return render(request, 'purbeurre/saved.html', context)
+
 
 @login_required
 def account(request):
@@ -93,6 +89,3 @@ def account(request):
         "page_title": 'Votre compte'
     }
     return render(request, 'purbeurre/account.html', context)
-
-
-

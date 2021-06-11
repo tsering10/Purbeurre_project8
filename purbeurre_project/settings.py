@@ -14,25 +14,23 @@ from pathlib import Path
 import os
 import dj_database_url
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY =  os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-if os.environ.get('ENV') == 'PRODUCTION':
-    DEBUG = False
-else:
-    DEBUG = True
+# if os.environ.get('ENV') == 'PRODUCTION':
+#     DEBUG = False
+# else:
 
-ALLOWED_HOSTS = ['ttsering-purbeurre.herokuapp.com']
+DEBUG = True
 
-
+# ALLOWED_HOSTS = ['ttsering-purbeurre.herokuapp.com']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -63,7 +61,7 @@ ROOT_URLCONF = 'purbeurre_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS':  [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,7 +76,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'purbeurre_project.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -86,13 +83,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'), # attention : remplacez par votre nom d'utilisateur !!
+        'USER': os.environ.get('DB_USER'),  # attention : remplacez par votre nom d'utilisateur !!
         'PASSWORD': os.environ.get('DB_PASSWORD'),
         'HOST': os.environ.get('DB_HOST'),
         'PORT': os.environ.get('DB_PORT'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -112,7 +108,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -126,7 +121,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -136,11 +130,7 @@ STATICFILES_DIRS = (
 
 STATIC_URL = '/static/'
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-
 INTERNAL_IPS = ['127.0.0.1']
-
 
 LOGIN_REDIRECT_URL = '/users/account'
 LOGIN_URL = '/users/login'
@@ -151,11 +141,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-
 if os.environ.get('ENV') == 'PRODUCTION':
-
     # Static files settings
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -167,7 +153,6 @@ if os.environ.get('ENV') == 'PRODUCTION':
     # Simplified static file serving.
     # https://warehouse.python.org/project/whitenoise/
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-
 
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)

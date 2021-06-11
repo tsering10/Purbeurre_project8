@@ -1,56 +1,47 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
-from django.http import Http404
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.decorators import login_required
 from .models import Products, Substitutes
-from .forms import SignUpForm
-from django.http import Http404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
-# Create your views here.
-from django.http import HttpResponse
 
+# Create your views here.
 
 def index(request):
     context = {
-        'page_title':'Accueil'
+        'page_title': 'Accueil'
     }
-    return render(request,'purbeurre/index.html')
+    return render(request, 'purbeurre/index.html')
+
 
 def search(request):
-
     # query of the search product
     query = request.GET.get('query')
 
-    
     # If query matches with product_name
     query_prod = Products.objects.filter(product_name__iexact=query).first()
 
-    
     # Check if the given string is contained in the value in database filed, query is not sensitive to case.
     if not query_prod:
         query_prod = Products.objects.filter(product_name__icontains=query).first()
-    
+
     if not query_prod:
         # raise Http404("Poll does not exist")
-        return redirect('purbeurre/404.html')     
+        return redirect('purbeurre/404.html')
     else:
-        products_list = Products.objects.filter(category=query_prod.category).filter(nutrition_score__lte=query_prod.nutrition_score).order_by('nutrition_score')
-       
+        products_list = Products.objects.filter(category=query_prod.category).filter(
+            nutrition_score__lte=query_prod.nutrition_score).order_by('nutrition_score')
+
         # If user login is True
         if request.user.is_authenticated:
             # Remove products that are  already in the user's list
             for product in products_list:
                 listed = Substitutes.objects.filter(
-                    origin = query_prod.id_product,
-                    replacement = product.id_product,
-                    user = request.user
-                    )
+                    origin=query_prod.id_product,
+                    replacement=product.id_product,
+                    user=request.user
+                )
                 if listed:
                     products_list = products_list.exclude(pk=product.id_product)
-    
+
     # If user wants to save a product
     if request.user.is_authenticated and request.method == 'POST':
         # product  searched
@@ -62,15 +53,15 @@ def search(request):
 
         # Place the searched product and its alternative in the user's list
         Substitutes.objects.create(
-            origin = origin,
-            replacement = replacement,
-            user = request.user
-            )
+            origin=origin,
+            replacement=replacement,
+            user=request.user
+        )
         # exclude saved items from search results page
         products_list = products_list.exclude(pk=replacement.id_product)
-    
+
     # pagination 9 products per page
-    paginator = Paginator(products_list, 9) 
+    paginator = Paginator(products_list, 9)
     page = request.GET.get('page')
 
     try:
@@ -80,7 +71,6 @@ def search(request):
     except EmptyPage:
         products = paginator.page(paginator.num_pages)
 
-    
     # Get the index of the current page
     page_index = products.number - 1
     # This value is maximum index of your pages, so the last page - 1
@@ -101,13 +91,13 @@ def search(request):
         'img': query_prod.img,
         'query_prod': query_prod.id_product,
         'page_range': page_range,
-        
+
     }
-    
-    return render(request, 'purbeurre/search.html',context)
 
-def detail(request,id_product):
+    return render(request, 'purbeurre/search.html', context)
 
+
+def detail(request, id_product):
     """
     detail information of each product
     """
@@ -115,8 +105,8 @@ def detail(request,id_product):
 
     context = {
         "img": product.img,
-        'product':product,
-        "product_name" : product.product_name
+        'product': product,
+        "product_name": product.product_name
     }
 
     return render(request, 'purbeurre/product_detail.html', context)
@@ -129,8 +119,9 @@ def contacts(request):
     """
     context = {
         "page_title": 'Nous contacter'
-        }
+    }
     return render(request, 'purbeurre/contacts.html', context)
+
 
 def legal(request):
     """

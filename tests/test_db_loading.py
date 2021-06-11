@@ -41,6 +41,6 @@ class CommandTestCase(TestCase):
 		self.com._request_api = mockreturn
 		self.com.handle()
 
-		# Databse must have been populated
+		# database must have been populated
 		self.assertEqual(Products.objects.all().exists(), True)
 		self.assertEqual(Categories.objects.all().exists(), True)
