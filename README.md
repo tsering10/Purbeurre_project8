@@ -45,8 +45,9 @@ $ python manage.py runserver
 ```
 Then go to localhost:8000 or 127.0.0.1:8000, and the app should be launched and usable there.
 
-## 4. To run the tests
+## 4. Tests
 
+To run the tests, cd into the directory where manage.py is:
 
 ```bash
 $ ./manage.py test 
@@ -67,3 +68,5 @@ $ coverage report -m
 
 $ coverage html
 ```
+## Acknowledgment
+I would like to thank my mentor Dimitri Ségard, for all the help and advices he gave to me to accomplish this project.
