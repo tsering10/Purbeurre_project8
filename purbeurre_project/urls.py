@@ -16,13 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
-from purbeurre import views
-from users import views 
+from users import views
 
 urlpatterns = [
     # home route
-    path("",views.index, name="index"),
-    url(r'^purbeurre/', include(('purbeurre.urls', 'purbeurre'),namespace='purbeurre')),
+    path("", views.index, name="index"),
+    url(r'^purbeurre/', include(('purbeurre.urls', 'purbeurre'), namespace='purbeurre')),
     path('users/', include('users.urls', namespace="users")),
     path('admin/', admin.site.urls),
 ]
