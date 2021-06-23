@@ -4,9 +4,6 @@ from purbeurre.models import Products, Categories, Substitutes, User
 from purbeurre.forms import UserCreationForm
 from django.test import LiveServerTestCase
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium import webdriver
-from django.contrib import auth
 
 
 class IndexPageTestCase(TestCase):
