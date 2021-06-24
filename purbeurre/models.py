@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
+from users.models import User
+# from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -41,6 +42,14 @@ class Substitutes(models.Model):
     origin = models.ForeignKey(Products, related_name='origin', on_delete=models.CASCADE)
     replacement = models.ForeignKey(Products, related_name='replacement', on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE, null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["origin", "replacement", "user"],
+                name="unique_user_favoris",
+            )
+        ]
 
     def __str__(self):
         return str({

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Products, Substitutes
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from users.models import User
 
 
 # Create your views here.

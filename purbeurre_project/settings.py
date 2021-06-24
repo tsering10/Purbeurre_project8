@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = True
 
-# ALLOWED_HOSTS = ['ttsering-purbeurre.herokuapp.com']
+# ALLOWED_HOSTS = ['tsering-purbeurre.herokuapp.com']
 
 ALLOWED_HOSTS = []
 
@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "purbeurre.apps.PurbeurreConfig",
-    'users.apps.UsersConfig'
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -121,6 +121,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+# custome user 
+AUTH_USER_MODEL = "users.User"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -136,6 +138,8 @@ INTERNAL_IPS = ['127.0.0.1']
 LOGIN_REDIRECT_URL = '/users/account'
 LOGIN_URL = '/users/login'
 LOGOUT_REDIRECT_URL = '/'
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
